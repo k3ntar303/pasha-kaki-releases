@@ -1,0 +1,6 @@
+{
+  "versionCode": 107,
+  "versionName": "0.7.7",
+  "apk": "https://raw.githubusercontent.com/k3ntar303/pasha-kaki-releases/main/pashagaki-107.apk",
+  "notes": "拡大(2本指)しても寸法・文字の入力や選択が終わらないように / アプリ内更新が失敗しにくく、失敗したら配布ページを開く"
+}

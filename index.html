@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>パシャガキ ダウンロード</title>
+<style>
+  /* PDFer の配布ページと同じ作り。色だけパシャガキの赤 */
+  :root {
+    --bg: #f6f7f9; --card: #ffffff; --ink: #1d232b; --sub: #5b6573; --line: #e3e6eb;
+    --red: #d42f2a; --red-ink: #ffffff; --soft: #fbeceb;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #15181c; --card: #1e2227; --ink: #e9edf2; --sub: #a3adba; --line: #2e343b; --red: #e5524d; --soft: #33201f; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: "Hiragino Sans", "Yu Gothic UI", "Meiryo", system-ui, sans-serif; line-height: 1.7;
+  }
+  main { max-width: 560px; margin: 0 auto; padding: 32px 16px 56px; }
+  h1 { font-size: 28px; margin: 0 0 4px; letter-spacing: .02em; }
+  .lead { color: var(--sub); margin: 0 0 6px; }
+  .ver { color: var(--sub); font-size: 14px; margin: 0 0 24px; min-height: 1.5em; }
+  .card {
+    background: var(--card); border: 1px solid var(--red); border-radius: 14px; padding: 20px;
+    display: flex; flex-direction: column; gap: 12px; box-shadow: 0 0 0 2px var(--soft);
+  }
+  .card h2 { font-size: 19px; margin: 0; }
+  .card .for { color: var(--sub); font-size: 14px; margin: 0; }
+  .btn {
+    display: block; text-align: center; text-decoration: none; font-weight: 700; font-size: 17px;
+    background: var(--red); color: var(--red-ink); border-radius: 10px; padding: 14px 12px;
+  }
+  .btn:active { opacity: .85; }
+  ol { margin: 0; padding-left: 1.3em; font-size: 15px; }
+  li { margin: 4px 0; }
+  .note { font-size: 14px; color: var(--sub); }
+  section.more { margin-top: 28px; background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; }
+  section.more h2 { font-size: 17px; margin: 0 0 6px; }
+  section.more p { margin: 6px 0; font-size: 15px; }
+  .mark { background: var(--soft); border-radius: 6px; padding: 0 6px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>パシャガキ</h1>
+  <p class="lead">現場写真に、撮ってすぐ手書き・寸法・矢印・文字などを書き込めるアプリです。</p>
+  <p class="ver" id="ver"></p>
+
+  <div class="card">
+    <h2>スマホ・タブレット版(Android)</h2>
+    <p class="for">Android 12 以上</p>
+    <a class="btn" href="pashagaki.apk" download>ダウンロード</a>
+    <ol>
+      <li>「このファイルは有害な可能性があります」と出たら <span class="mark">ダウンロード</span> を押します。</li>
+      <li>終わったら <span class="mark">開く</span> を押します。</li>
+      <li>「この提供元のアプリを許可しない設定」と出たら、<span class="mark">設定</span> →「この提供元のアプリを許可」をONにして戻ります。</li>
+      <li><span class="mark">インストール</span> を押します。Google Play プロテクトの確認が出たら「詳細」→「インストールする」。</li>
+      <li>アプリを開き、写真へのアクセスで <span class="mark">すべて許可</span> を選びます。</li>
+    </ol>
+    <p class="note">Playストア以外から入れるアプリには、どれも同じ表示が出ます。</p>
+  </div>
+
+  <section class="more">
+    <h2>更新</h2>
+    <p>新しい版ができると、アプリの写真一覧の上に「新しい版があります」と出ます。<span class="mark">更新する</span> を押すと更新できます。</p>
+    <p>すぐ確かめたい時は、右上の歯車(設定)→「更新を確認」。</p>
+    <h2 style="margin-top:14px">使い方・困った時</h2>
+    <p>設定 →「使い方」を見てください。うまく動かない時は、設定 →「不具合を報告」で動作の記録をLINEなどで送れます(写真は含まれません)。</p>
+  </section>
+</main>
+<script>
+  // 今の版を出す(アプリが更新を確かめるのと同じ情報)
+  fetch("latest.json", { cache: "no-store" })
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (l) { if (l && l.versionName) document.getElementById("ver").textContent = "最新版 " + l.versionName; })
+    .catch(function () {});
+</script>
+</body>
+</html>
